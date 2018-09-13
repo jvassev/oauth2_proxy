@@ -75,7 +75,8 @@ type Options struct {
 	Scope             string `flag:"scope" cfg:"scope"`
 	ApprovalPrompt    string `flag:"approval-prompt" cfg:"approval_prompt"`
 
-	GazIdpId string `flag:"gaz-idp-id" cfg:"gaz_idp_id"`
+	GazIdpId     string   `flag:"gaz-idp-id" cfg:"gaz_idp_id"`
+	ExtraHeaders []string `flag:"extra-headers" cfg:"extra_headers"`
 
 	RequestLogging       bool   `flag:"request-logging" cfg:"request_logging"`
 	RequestLoggingFormat string `flag:"request-logging-format" cfg:"request_logging_format"`
@@ -254,6 +255,7 @@ func parseProviderInfo(o *Options, msgs []string) []string {
 		ClientSecret:   o.ClientSecret,
 		ApprovalPrompt: o.ApprovalPrompt,
 		GazIdpId:       o.GazIdpId,
+		ExtraHeaders:   o.ExtraHeaders,
 	}
 	p.LoginURL, msgs = parseURL(o.LoginURL, "login", msgs)
 	p.RedeemURL, msgs = parseURL(o.RedeemURL, "redeem", msgs)

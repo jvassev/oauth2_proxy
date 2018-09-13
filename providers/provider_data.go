@@ -16,7 +16,10 @@ type ProviderData struct {
 	Scope             string
 	ApprovalPrompt    string
 
-	GazIdpId string
+	GazIdpId     string
+	ExtraHeaders []string
 }
 
 func (p *ProviderData) Data() *ProviderData { return p }
+
+type ClientDataGetter func() (string, string)

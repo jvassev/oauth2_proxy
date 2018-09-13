@@ -709,6 +709,18 @@ func (p *OAuthProxy) Authenticate(rw http.ResponseWriter, req *http.Request) int
 	} else {
 		rw.Header().Set("GAP-Auth", session.Email)
 	}
+
+	for _, hv := range p.provider.Data().ExtraHeaders {
+		parts := strings.Split(hv, ":")
+		if len(parts) != 2 {
+			continue
+		}
+		name := strings.TrimSpace(parts[0])
+		value := strings.TrimSpace(parts[1])
+
+		req.Header[name] = []string{value}
+	}
+
 	return http.StatusAccepted
 }
 
