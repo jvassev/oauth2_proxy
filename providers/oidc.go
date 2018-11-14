@@ -3,6 +3,7 @@ package providers
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"time"
 
 	"golang.org/x/oauth2"
@@ -19,6 +20,23 @@ type OIDCProvider struct {
 func NewOIDCProvider(p *ProviderData) *OIDCProvider {
 	p.ProviderName = "OpenID Connect"
 	return &OIDCProvider{ProviderData: p}
+}
+
+// GetLoginURL with typical oauth parameters
+func (p *OIDCProvider) GetLoginURL(redirectURI, state string) string {
+	var a url.URL
+	a = *p.LoginURL
+	params, _ := url.ParseQuery(a.RawQuery)
+	params.Set("redirect_uri", redirectURI)
+	params.Set("approval_prompt", p.ApprovalPrompt)
+	params.Add("scope", p.Scope)
+	params.Set("client_id", p.ClientID)
+	params.Set("response_type", "code")
+	params.Add("state", state)
+	params.Set("idp_id", p.ProviderData.GazIdpId)
+
+	a.RawQuery = params.Encode()
+	return a.String()
 }
 
 func (p *OIDCProvider) Redeem(redirectURL, code string) (s *SessionState, err error) {
