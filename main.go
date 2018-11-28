@@ -82,6 +82,7 @@ func main() {
 	flagSet.String("approval-prompt", "force", "OAuth approval_prompt")
 
 	flagSet.String("gaz-idp-id", "", "Value for the idp_id parameter")
+	flagSet.String("gaz-context-id", "", "Value for the context_id parameter")
 	flagSet.Var(&extraHeaders, "extra-headers", "Extra headers to pass to the upstream 'Header: Value' format")
 
 	flagSet.String("signature-key", "", "GAP-Signature request signature key (algorithm:secretkey)")

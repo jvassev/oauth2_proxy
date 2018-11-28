@@ -76,6 +76,7 @@ type Options struct {
 	ApprovalPrompt    string `flag:"approval-prompt" cfg:"approval_prompt"`
 
 	GazIdpId     string   `flag:"gaz-idp-id" cfg:"gaz_idp_id"`
+	GazContextId string   `flag:"gaz-context-id" cfg:"gaz_context_id"`
 	ExtraHeaders []string `flag:"extra-headers" cfg:"extra_headers"`
 
 	RequestLogging       bool   `flag:"request-logging" cfg:"request_logging"`
@@ -255,6 +256,7 @@ func parseProviderInfo(o *Options, msgs []string) []string {
 		ClientSecret:   o.ClientSecret,
 		ApprovalPrompt: o.ApprovalPrompt,
 		GazIdpId:       o.GazIdpId,
+		GazContextId:   o.GazContextId,
 		ExtraHeaders:   o.ExtraHeaders,
 	}
 	p.LoginURL, msgs = parseURL(o.LoginURL, "login", msgs)

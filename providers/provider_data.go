@@ -17,6 +17,7 @@ type ProviderData struct {
 	ApprovalPrompt    string
 
 	GazIdpId     string
+	GazContextId string
 	ExtraHeaders []string
 }
 

@@ -34,6 +34,9 @@ func (p *OIDCProvider) GetLoginURL(redirectURI, state string) string {
 	params.Set("response_type", "code")
 	params.Add("state", state)
 	params.Set("idp_id", p.ProviderData.GazIdpId)
+	if p.ProviderData.GazContextId != "" {
+		params.Set("context_id", p.ProviderData.GazContextId)
+	}
 
 	a.RawQuery = params.Encode()
 	return a.String()
