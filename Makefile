@@ -21,5 +21,5 @@ shell:
 	  $(IMAGE):$(TAG)
 
 guess-tag:
-	@echo "TAG=v`git describe --always`"
+	@echo "TAG=v`git rev-parse --short HEAD`"
 
